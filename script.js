@@ -117,3 +117,21 @@ if (rsvpForm) {
 
   updateAttendance();
 }
+
+// Optional email notification to the couple
+if (NOTIFY_EMAIL) {
+  try {
+    MailApp.sendEmail({
+      to: NOTIFY_EMAIL,
+      subject: "Wedding RSVP - " + name,
+      body:
+        "Name: " + name +
+        "\nAttendance: " + attendance +
+        "\nEmail: " + email +
+        "\nChildren invited: " + childrenInvited +
+        "\nChildren attending: " + childrenCount
+    });
+  } catch (mailError) {
+    console.error("Notification failed:", mailError);
+  }
+}
